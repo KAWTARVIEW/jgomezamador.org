@@ -3,89 +3,696 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FD CARTALLA SERVICES LLC</title>
+    <title>JASCENCION GOMEZ AMADOR LLC | Residential Building Construction</title>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
     <style>
-        body {
+        /* Slate Grey, Warm Amber & Industrial Charcoal Palette */
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --slate-primary: #334155;
+            --slate-deep: #0f172a;
+            --accent-amber: #d97706;
+            --accent-light: #fef3c7;
+            --border-color: #e2e8f0;
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Top Bar */
+        .top-notice {
+            background: var(--slate-deep);
+            color: #cbd5e1;
+            font-size: 0.825rem;
+            font-weight: 500;
+            padding: 0.6rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--slate-deep);
+            letter-spacing: -0.02em;
+        }
+
+        .brand i {
+            color: var(--accent-amber);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-amber);
+        }
+
+        .btn-amber {
+            background: linear-gradient(135deg, #d97706, #b45309);
+            color: #ffffff;
+            padding: 0.75rem 1.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.875rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(217, 119, 6, 0.25);
+        }
+
+        .btn-amber:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(217, 119, 6, 0.35);
+        }
+
+        .wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        #about {
+            padding: 5.5rem 0;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.25rem;
+            line-height: 1.15;
+            color: var(--slate-deep);
+            font-weight: 800;
+            margin-bottom: 1.25rem;
+            letter-spacing: -0.025em;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-amber);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stat-card h4 {
+            font-size: 1.4rem;
+            color: var(--slate-deep);
+            font-weight: 800;
+        }
+
+        .stat-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .hero-image-container {
+            position: relative;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
+            border: 1px solid var(--border-color);
+        }
+
+        .floating-card {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .floating-card i {
+            color: var(--accent-amber);
+            background: var(--accent-light);
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        /* Services Grid */
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 6rem auto 3rem auto;
+        }
+
+        .section-header p {
+            color: var(--accent-amber);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            color: var(--slate-deep);
+            font-weight: 800;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-amber);
+            box-shadow: 0 12px 30px rgba(217, 119, 6, 0.1);
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent-light);
+            color: var(--accent-amber);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            color: var(--slate-deep);
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Showcase Banner */
+        .showcase-banner {
+            background: var(--slate-deep);
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 4rem;
+            margin: 6rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .showcase-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .showcase-images img:first-child {
+            grid-column: span 2;
+            height: 250px;
+        }
+
+        .showcase-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .showcase-content p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-bullets {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            gap: 0.75rem;
         }
-        .hero {
-            background: linear-gradient(135deg, #004d7a, #008793, #00bf72);
-            color: #fff;
-            padding: 60px 20px;
-            text-align: center;
+
+        .feature-bullets li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #e2e8f0;
+            font-weight: 600;
         }
-        .hero h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
+
+        .feature-bullets li i {
+            color: var(--accent-amber);
         }
-        .hero p {
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto;
+
+        /* Contact Section */
+        .contact-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            margin-bottom: 6rem;
         }
-        .content {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            background: #fff;
+
+        .contact-info h2 {
+            font-size: 2rem;
+            color: var(--slate-deep);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 1.25rem;
+            margin-top: 2rem;
+            align-items: flex-start;
+        }
+
+        .info-row i {
+            color: var(--accent-amber);
+            background: var(--accent-light);
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        .info-row label {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+
+        .info-row strong {
+            font-size: 1rem;
+            color: var(--slate-deep);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 1rem;
+            color: var(--text-dark);
+            font-family: inherit;
+            font-size: 0.95rem;
         }
-        h2 {
-            color: #006064;
-            margin-top: 30px;
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-amber);
+            background: #ffffff;
         }
-        p, li {
-            font-size: 1.1em;
-            line-height: 1.6;
+
+        .submit-btn {
+            background: var(--slate-deep);
+            color: #ffffff;
+            border: none;
+            padding: 1.1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        ul {
-            padding-left: 20px;
-            list-style-type: disc;
+
+        .submit-btn:hover {
+            background: var(--accent-amber);
         }
+
+        /* Modal Privacy Policy */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-body {
+            background: #ffffff;
+            border-radius: 16px;
+            max-width: 750px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 3rem;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .modal-body h3 {
+            color: var(--slate-deep);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body h4 {
+            color: var(--slate-deep);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
         footer {
+            background: var(--slate-deep);
+            color: #94a3b8;
+            padding: 3rem 0;
             text-align: center;
-            padding: 20px;
-            background: #004d7a;
-            color: #fff;
-            margin-top: auto;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-amber);
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            #about, .showcase-banner, .contact-card {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>FD CARTALLA SERVICES LLC</h1>
-        <p>Powering your spaces with excellence—expert electrical services for residential, commercial, and industrial needs across Miami and beyond.</p>
+
+    <div class="top-notice">
+        <div>JASCENCION GOMEZ AMADOR LLC — General Contracting & Residential Building</div>
+        <div>Commerce, GA Location</div>
     </div>
 
-    <div class="content">
-        <h2>About Us</h2>
-        <p>FD CARTALLA SERVICES LLC is a trusted electrical service provider based in Miami, Florida. We specialize in a wide range of electrical solutions, offering high-quality installation, maintenance, and repair services for both residential and commercial properties. Our team of certified electricians ensures safety, efficiency, and compliance with all local regulations, delivering reliable results every time.</p>
+    <header>
+        <div class="brand">
+            <i data-lucide="hammer"></i> JASCENCION GOMEZ AMADOR LLC
+        </div>
+        <nav>
+            <a href="#about">About Us</a>
+            <a href="#services">Services</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact" class="btn-amber">Get A Quote</a>
+        </nav>
+    </header>
 
-        <h2>Our Services</h2>
-        <ul>
-            <li>Residential & Commercial Electrical Installations</li>
-            <li>Lighting Design & Installation</li>
-            <li>Electrical Panel Upgrades & Repairs</li>
-            <li>Energy Efficiency Solutions</li>
-            <li>Emergency Electrical Services</li>
-        </ul>
+    <div class="wrapper">
+        <!-- Hero Section -->
+        <section id="about">
+            <div class="hero-text">
+                <h1>Crafting Exceptional <span>Single-Family Homes</span> & Structures</h1>
+                <p>Delivering residential building construction, structural enhancements, and quality custom housing projects in Commerce, GA.</p>
 
-        <h2>Contact Us</h2>
-        <p>Address: 2476 SW 18th St, Miami, FL 33145, USA</p>
-        <p>Email: <a href="mailto:cartalla@fdcartallaservices.shop">cartalla@fdcartallaservices.shop</a></p>
-        <p>Phone: +1 (305) 930-3861</p>
+                <a href="#contact" class="btn-amber" style="padding: 1rem 2rem; display: inline-block;">Start Your Building Project</a>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Commerce, GA</h4>
+                        <p>9083 Jefferson St</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Residential</h4>
+                        <p>Building Specialist</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Single-Family</h4>
+                        <p>Housing Development</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80" alt="Modern home under framing construction with blueprint detail">
+                <div class="floating-card">
+                    <i data-lucide="home" size="28"></i>
+                    <div>
+                        <strong style="color: var(--slate-deep); display: block;">Licensed Contracting</strong>
+                        <span style="color: var(--text-muted); font-size: 0.85rem;">Precision & Safety Focused</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="section-header">
+                <p>Construction Expertise</p>
+                <h2>Building & Contracting Services</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="home" size="26"></i>
+                    </div>
+                    <h3>Single-Family Housing</h3>
+                    <p>End-to-end residential construction for new single-family homes, built to modern architectural standards.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="wrench" size="26"></i>
+                    </div>
+                    <h3>General Building Contracting</h3>
+                    <p>Full project management, site preparation, framing, and general structure development from start to completion.</p>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-lucide="hard-hat" size="26"></i>
+                    </div>
+                    <h3>Structural Renovation</h3>
+                    <p>Expert structural expansions, exterior updates, and comprehensive residential remodeling services.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Banner -->
+        <section id="projects" class="showcase-banner">
+            <div class="showcase-images">
+                <img src="https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80" alt="Active residential housing construction site with workers">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Completed modern custom single-family house exterior">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80" alt="Beautiful newly built residential modern home">
+            </div>
+
+            <div class="showcase-content">
+                <p style="color: var(--accent-amber); text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; font-size: 0.85rem;">Workmanship Guarantee</p>
+                <h3>Built With Quality, Structural Integrity & Pride</h3>
+                <p>At JASCENCION GOMEZ AMADOR LLC, we pride ourselves on delivering structural craftsmanship and reliable project delivery on every job site.</p>
+
+                <ul class="feature-bullets">
+                    <li><i data-lucide="check-circle-2"></i> On-Time Project Schedule Management</li>
+                    <li><i data-lucide="check-circle-2"></i> Premium Building Materials & Workmanship</li>
+                    <li><i data-lucide="check-circle-2"></i> Strict Compliance with GA Building Codes</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="contact-card">
+                <div class="contact-info">
+                    <h2>Contact Our Builders</h2>
+                    <p>Discuss your upcoming home build, get an estimate, or consult with our team.</p>
+
+                    <div class="info-row">
+                        <i data-lucide="mail"></i>
+                        <div>
+                            <label>Direct Email</label>
+                            <strong>contact@jgomezamador.org</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <i data-lucide="phone"></i>
+                        <div>
+                            <label>Call Us</label>
+                            <strong>+1 425 940 6417</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-row">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <label>Office Address</label>
+                            <strong>9083 Jefferson St Commerce, GA, 30529-2251 United States</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="event.preventDefault();">
+                    <div class="form-row">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="text" placeholder="Phone Number" required>
+                    </div>
+                    <input type="email" placeholder="Email Address" required>
+                    <textarea rows="5" placeholder="Tell us about your residential project, site location, or scope..." required></textarea>
+                    <button type="submit" class="submit-btn">Submit Request</button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal-overlay">
+        <div class="modal-body">
+            <button class="close-btn" onclick="togglePrivacyModal()"><i data-lucide="x" size="24"></i></button>
+            <h3>Privacy Policy</h3>
+
+            <h4>1. Information Collection</h4>
+            <p>JASCENCION GOMEZ AMADOR LLC collects user-submitted details (such as name, phone number, and email) solely to respond to project inquiries and schedule estimates.</p>
+
+            <h4>2. Data Integrity & Safeguards</h4>
+            <p>We are committed to maintaining data privacy. Your contact details will not be sold, traded, or shared with third parties for promotional purposes.</p>
+
+            <h4>3. Inquiry Contact</h4>
+            <p>For questions concerning privacy practice details, please contact contact@jgomezamador.org.</p>
+        </div>
     </div>
 
     <footer>
-        &copy; 2025 FD CARTALLA SERVICES LLC. All rights reserved.
+        <div class="wrapper">
+            <p>&copy;  JASCENCION GOMEZ AMADOR LLC. All rights reserved. Commerce, GA.</p>
+            <div class="footer-links">
+                <a onclick="togglePrivacyModal()">Privacy Policy</a>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function togglePrivacyModal() {
+            const modal = document.getElementById('privacy-modal');
+            modal.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
